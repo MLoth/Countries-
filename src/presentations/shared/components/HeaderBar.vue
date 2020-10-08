@@ -4,9 +4,12 @@
 			Countries Explorer
 		</router-link>
 
+		<!-- focus:shadow-outline -->
+		<!-- Generieke manier om gelijkaardige focus states te voorzien. Vergeet niet om altijd eerst de focus te resetten! -->
+
 		<nav class="flex">
-			<router-link class="text-lg font-light" to="/">Home</router-link>
-			<router-link class="text-lg font-light ml-8" to="/about">About</router-link>
+			<router-link class="text-lg font-light focus:outline-none focus:shadow-outline rounded-lg" to="/">Home</router-link>
+			<router-link class="text-lg font-light focus:outline-none focus:shadow-outline rounded-lg ml-8" to="/about">About</router-link>
 		</nav>
 	</header>
 </template>

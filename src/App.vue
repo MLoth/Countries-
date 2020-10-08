@@ -1,10 +1,6 @@
 <template>
-	<div class="bg-white">
-		<HeaderBar />
-		<!-- <router-link to="/">Home</router-link> |
-		<router-link to="/about">About</router-link> -->
-		<router-view />
-	</div>
+	<HeaderBar />
+	<router-view />
 </template>
 
 <script lang="ts">
@@ -21,3 +17,10 @@ export default defineComponent({
 	},
 });
 </script>
+
+<style>
+body,
+html {
+	@apply bg-white; /* tailwind directive */
+}
+</style>

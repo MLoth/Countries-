@@ -1,5 +1,5 @@
 <template>
-	<div class="opacity-50 hover:opacity-100">
+	<router-link :to="`/${alpha3Code}`" class="opacity-50 hover:opacity-100 focus:outline-none focus:shadow-outline">
 		<header class="flex items-center mb-4">
 			<img class="h-6 w-auto rounded-md" :src="`https://restcountries.eu/data/${alpha3Code.toLowerCase()}.svg`" :alt="`The flag of ${name}.`" />
 
@@ -18,7 +18,7 @@
 			</div>
 			<img class="w-2/3" :src="getFlag(alpha2Code)" :alt="`The map of ${name}.`" />
 		</div>
-	</div>
+	</router-link>
 </template>
 
 <script lang="ts">
