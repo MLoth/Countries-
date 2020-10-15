@@ -1,36 +1,55 @@
 import { createStore } from 'vuex'
 
-// TODO: make interface
-// TODO: make model
+import Review from '@/models/Review';
+
+export type State = {
+	[reviews: string]: {[countryCode: string]: Array<Review>}
+}
+
+// MUTATIONS
+export enum MUTATIONS {
+	ADD_REVIEW_TO_COUNTRY = 'addReviewToCountry',
+}
+
+export type countryReviewPayload = {
+	country: string;
+	review: Review
+}
+
+export type Mutations<S = State> = {
+  [MUTATIONS.ADD_REVIEW_TO_COUNTRY](state: S, payload: countryReviewPayload): void
+}
+
+const state: State = {
+	reviews: localStorage.countryReviews ? JSON.parse(localStorage.countryReviews) : {}
+}
 
 export default createStore({
-  state: {
-	  // @ts-ignore
-      reviews: {}
-  },
+  state: state,
 
   getters: {
-	// @ts-ignore
 	getReviewsByCountryCode: state => (countryCode: string) => {
-		console.log({countryCode});
-		
-		// @ts-ignore
 		return state.reviews[countryCode] ? state.reviews[countryCode] : [];
 	}
   },
 
   mutations: {
-	  addReviewToCountry(state, {country, review}) {
+		[MUTATIONS.ADD_REVIEW_TO_COUNTRY](state, {country, review}) {
 		const countryKey = country.toLowerCase();
+		// Kopie van maken zorgt ervoor dat de reactivity verloren gaat (hier willen we dat ;-))
+		const r: Review = {
+			title: review.title,
+			description: review.description,
+			rating: review.rating
+		};
 
-		// @ts-ignore
+
 		  if (state.reviews.hasOwnProperty(countryKey)) {
-			//   @ts-ignore
-			  state.reviews[countryKey].push(review);
+			  state.reviews[countryKey].push(r);
 		  } else {
-			//   @ts-ignore
-			  state.reviews[countryKey] = [review];
+			  state.reviews[countryKey] = [r];
 		  }
+		  localStorage.setItem('countryReviews', JSON.stringify(state.reviews));
 		  console.log(state);
 		  
 	  }
