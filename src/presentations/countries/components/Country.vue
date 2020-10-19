@@ -1,7 +1,16 @@
 <template>
-	<router-link :to="`/${alpha3Code}`" class="opacity-50 hover:opacity-100 focus:outline-none focus:shadow-outline">
+	<router-link
+		:to="`/${alpha3Code}`"
+		class="opacity-50 hover:opacity-100 focus:outline-none focus:shadow-outline"
+	>
 		<header class="flex items-center mb-4">
-			<img class="h-6 w-auto rounded-md" :src="`https://restcountries.eu/data/${alpha3Code.toLowerCase()}.svg`" :alt="`The flag of ${name}.`" />
+			<img
+				class="h-6 w-auto rounded-md"
+				:src="
+					`https://restcountries.eu/data/${alpha3Code.toLowerCase()}.svg`
+				"
+				:alt="`The flag of ${name}.`"
+			/>
 
 			<h2 class="text-xl font-semibold ml-3">{{ name }}</h2>
 		</header>
@@ -16,13 +25,18 @@
 				<h3 class="font-semibold">Rating:</h3>
 				<!-- TODO: stars -->
 			</div>
-			<img class="w-2/3" :src="getFlag(alpha2Code)" :alt="`The map of ${name}.`" />
+			<img
+				class="w-2/3"
+				:src="getFlag(alpha2Code)"
+				:alt="`The map of ${name}.`"
+			/>
 		</div>
 	</router-link>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
+import store, { MutationTypes } from "@/store";
 
 export default defineComponent({
 	props: {
@@ -30,7 +44,7 @@ export default defineComponent({
 		capital: String,
 		region: String,
 		alpha2Code: String,
-		alpha3Code: String,
+		alpha3Code: String
 	},
 
 	setup() {
@@ -41,8 +55,8 @@ export default defineComponent({
 		};
 
 		return {
-			getFlag,
+			getFlag
 		};
-	},
+	}
 });
 </script>

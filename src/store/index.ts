@@ -7,17 +7,20 @@ export type State = {
 }
 
 // MUTATIONS
-export enum MUTATIONS {
+export enum MutationTypes {
 	ADD_REVIEW_TO_COUNTRY = 'addReviewToCountry',
+	REMOVE_REVIEW_FROM_COUNTRY = 'removeReviewFromCountry'
 }
 
+// TODO: make smoother
 export type countryReviewPayload = {
 	country: string;
 	review: Review
 }
 
 export type Mutations<S = State> = {
-  [MUTATIONS.ADD_REVIEW_TO_COUNTRY](state: S, payload: countryReviewPayload): void
+  [MutationTypes.ADD_REVIEW_TO_COUNTRY](state: S, payload: countryReviewPayload): void,
+  [MutationTypes.REMOVE_REVIEW_FROM_COUNTRY](state: S, payload: countryReviewPayload): void,
 }
 
 const state: State = {
@@ -34,7 +37,7 @@ export default createStore({
   },
 
   mutations: {
-		[MUTATIONS.ADD_REVIEW_TO_COUNTRY](state, {country, review}) {
+		[MutationTypes.ADD_REVIEW_TO_COUNTRY](state, {country, review}) {
 		const countryKey = country.toLowerCase();
 		// Kopie van maken zorgt ervoor dat de reactivity verloren gaat (hier willen we dat ;-))
 		const r: Review = {
