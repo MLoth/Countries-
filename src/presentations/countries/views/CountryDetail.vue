@@ -70,7 +70,10 @@
 							>
 							<!-- Rating -->
 							<!-- TODO: v-model="newReview.rating" -->
-							<Rating v-model="newReview.rating" />
+							<Rating
+								@input="checkValue(value)"
+								v-model="newReview.rating"
+							/>
 
 							<button
 								@click="addNewReview($event)"

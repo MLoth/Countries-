@@ -118,7 +118,7 @@ export default defineComponent({
 			default: false
 		},
 
-		value: {
+		modelValue: {
 			type: String
 			// required: true
 		}
@@ -144,16 +144,16 @@ export default defineComponent({
 		};
 
 		console.log("The prop is", props);
-		if (props.value) {
-			setRatingValue(+props.value);
+		if (props.modelValue) {
+			setRatingValue(+props.modelValue);
 		}
 
 		const checkRatingValue = (event: Event) => {
 			if (event.target instanceof HTMLInputElement) {
 				setRatingValue(+event.target.value);
 				// Code voor onze (custom) v-model
-				console.log(event.target.value);
-				emit("input", event.target.value);
+				console.log("Sending", event.target.value);
+				emit("update:modelValue", event.target.value);
 			}
 		};
 
